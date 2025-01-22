@@ -16,7 +16,7 @@ local M     = {
 	},
 	group_x = nil,
 	-- todo part of larger palette registration but do this better
-	none = "none",
+	none    = "none",
 }
 
 M.bg_light  = "#242627"
@@ -51,6 +51,25 @@ M.syn       = {
 	delim       = M.fg_dark3,
 	exception   = M.red,
 	operator    = M.x.operator,
+}
+
+M.terminal  = {
+	black         = util.lighten(M.bg_light3, 0.95),
+	bright_black  = M.fg_dark3,
+	red           = util.darken(M.red, 0.85),
+	bright_red    = M.red,
+	green         = util.darken(M.green, 0.85),
+	bright_green  = M.green,
+	yellow        = util.darken(M.yellow, 0.85),
+	bright_yellow = M.yellow,
+	blue          = util.darken(M.blue, 0.85),
+	bright_blue   = M.blue,
+	purple        = util.darken(M.purple, 0.85),
+	bright_purple = M.purple,
+	cyan          = util.darken(M.cyan, 0.85),
+	bright_cyan   = M.cyan,
+	white         = M.fg,
+	bright_white  = util.lighten(M.fg, 0.85)
 }
 
 return M

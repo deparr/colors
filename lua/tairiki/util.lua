@@ -4,7 +4,7 @@ M.bg = "#000000"
 M.fg = "#ffffff"
 
 ---@param c string
-local function rgb(c)
+function M.rgb(c)
 	c = string.lower(c)
 	return { tonumber(c:sub(2, 3), 16), tonumber(c:sub(4, 5), 16), tonumber(c:sub(6, 7), 16) }
 end
@@ -13,8 +13,8 @@ end
 ---@param background string background color
 ---@param alpha number number between 0 and 1. 0 results in bg, 1 results in fg
 function M.blend(foreground, background, alpha)
-	local bg = rgb(background)
-	local fg = rgb(foreground)
+	local bg = M.rgb(background)
+	local fg = M.rgb(foreground)
 
 	local blendChannel = function(i)
 		local ret = (alpha * fg[i] + ((1 - alpha) * bg[i]))
@@ -39,6 +39,11 @@ function M.blend_fg(hex, amount, fg)
 	return M.blend(hex, fg or M.fg, math.abs(amount))
 end
 M.lighten = M.blend_fg
+
+local me = debug.getinfo(1, "S").source:sub(2)
+me = vim.fn.fnamemodify(me, ":h:h")
+print(me)
+
 
 return M
 

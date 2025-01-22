@@ -1,5 +1,5 @@
 local util = require("tairiki.util")
----@type tairiki.Palette
+---@class tairiki.Palette
 local M = {
 	bg = "#151515",
 	fg = "#c5c8c6",
@@ -15,6 +15,7 @@ local M = {
 	syn = nil,
 	diff = nil,
 	-- todo dont like this way of extra colors, but also want it to be typed
+	-- metatable indexing??
 	x = {
 		light_orange = "#e78c45",
 		light_purple = "#c397d8",
@@ -62,8 +63,9 @@ M.syn       = {
 }
 
 -- todo not sure about this way of doing overrides
+-- this isn't extensible, at least not easily, need to do this better
 ---@param self tairiki.Palette
-function M.group_x(self)
+function M.group_x(self, opts)
 	return {
 		-- treesitter
 		["@attribute.builtin"]       = { fg = self.red },
@@ -99,13 +101,12 @@ function M.group_x(self)
 		["@namespace.vim"]           = { fg = self.orange },
 		["@punctuation.bracket.css"] = { fg = self.fg_dark2 },
 
-		-- todo diag
-		-- neovim
-		DiagnosticVirtualTextError   = { fg = self.x.dark_red, bg = "#281b1b" },
-		DiagnosticVirtualTextHint    = { fg = self.x.light_purple, bg = "#262229" },
-		DiagnosticVirtualTextInfo    = { fg = self.x.dark_cyan, bg = "#1e2625" },
-		DiagnosticVirtualTextOk      = { fg = util.darken(self.green, 0.9, self.bg), bg = "#23241d" },
-		DiagnosticVirtualTextWarn    = { fg = self.x.dark_yellow, bg = "#2a271a" },
+		-- todo no opts here
+		DiagnosticVirtualTextError   = { fg = self.x.dark_red, bg = opts.diagnostics.background and "#281b1b" or self.none },
+		DiagnosticVirtualTextHint    = { fg = self.x.light_purple, bg = opts.diagnostics.background and "#262229" or self.none },
+		DiagnosticVirtualTextInfo    = { fg = self.x.dark_cyan, bg = opts.diagnostics.background and "#1e2625" or self.none },
+		DiagnosticVirtualTextOk      = { fg = util.darken(self.green, 0.9, self.bg), bg = opts.diagnostics.background and "#23241d" or self.none },
+		DiagnosticVirtualTextWarn    = { fg = self.x.dark_yellow, bg = opts.diagnostics.background and "#2a271a" or self.none },
 		FloatBorder                  = { fg = self.fg_dark3, bg = self.bg_light },
 		FloatTitle                   = "Title",
 		FoldColumn                   = { fg = self.fg_dark, bg = self.bg_light },

@@ -17,9 +17,6 @@ local M     = {
 	x = {
 		light_orange = "#c72e0f",
 		light_purple = "#693988",
-		dark_cyan    = "#2b5d63",
-		dark_red     = "#833b3b",
-		dark_yellow  = "#7c5c20",
 	},
 	none = "none",
 }
@@ -59,6 +56,25 @@ M.syn       = {
 	operator    = M.fg_dark,
 }
 
+M.terminal  = {
+	black         = util.lighten(M.bg_light3, 0.95),
+	bright_black  = M.fg_dark3,
+	red           = util.darken(M.red, 0.85),
+	bright_red    = M.red,
+	green         = util.darken(M.green, 0.85),
+	bright_green  = M.green,
+	yellow        = util.darken(M.yellow, 0.85),
+	bright_yellow = M.yellow,
+	blue          = util.darken(M.blue, 0.85),
+	bright_blue   = M.blue,
+	purple        = util.darken(M.purple, 0.85),
+	bright_purple = M.purple,
+	cyan          = util.darken(M.cyan, 0.85),
+	bright_cyan   = M.cyan,
+	white         = M.fg,
+	bright_white  = util.lighten(M.fg, 0.85)
+}
+
 function M.group_x(self)
 	return {
 		["@attribute.builtin"]       = { fg = self.red },
@@ -76,7 +92,6 @@ function M.group_x(self)
 		["@markup.math"]             = { fg = self.blue },
 		["@markup.quote"]            = { fg = self.fg_dark2 },
 		["@markup.raw.block"]        = { fg = self.fg_dark2 },
-		["@module"]                  = { fg = "#b1bdc4" }, -- TODO util
 		["@string.escape"]           = { fg = self.red },
 		["@string.regexp"]           = { fg = self.orange },
 		["@string.special.url"]      = { fg = self.blue, underline = true },
@@ -96,11 +111,6 @@ function M.group_x(self)
 
 		-- todo diag darkening in real groups
 		-- shouldnt be here
-		DiagnosticVirtualTextError   = { fg = self.x.dark_red, bg = "#281b1b" },
-		DiagnosticVirtualTextHint    = { fg = self.x.light_purple, bg = "#262229" },
-		DiagnosticVirtualTextInfo    = { fg = self.x.dark_cyan, bg = "#1e2625" },
-		DiagnosticVirtualTextOk      = { fg = util.darken(self.green, 0.9, self.bg), bg = "#23241d" },
-		DiagnosticVirtualTextWarn    = { fg = self.x.dark_yellow, bg = "#2a271a" },
 		FloatBorder                  = { fg = self.fg_dark3, bg = self.bg_light },
 		FloatTitle                   = "Title",
 		FoldColumn                   = { fg = self.fg_dark, bg = self.bg_light },
