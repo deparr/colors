@@ -2,9 +2,8 @@ local M = {}
 
 ---@param opts tairiki.Config
 function M.load(opts)
-	local palette = require("tairiki.palette").load(opts.palette)
+	local palette = require("tairiki.palette").load(opts.palette, opts)
 	local groups = require("tairiki.groups").load(opts, palette)
-
 
 	if vim.g.colors_name then
 		vim.cmd "hi clear"

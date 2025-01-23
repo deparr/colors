@@ -65,9 +65,9 @@ function M.get(c, opts)
 		["@markup.link.label"]          = { fg = c.orange },  -- todo util
 		["@markup.link.url"]            = { underline = true }, -- todo util
 		["@markup.raw"]                 = "String",
-		["@markup.list"]                = "TairikiTODO",
-		["@markup.list.checked"]        = "TairikiTODO",
-		["@markup.list.unchecked"]      = "TairikiTODO",
+		["@markup.list"]                = "Special",
+		["@markup.list.checked"]        = { fg = util.saturate(c.yellow, 0.25), bold = true },
+		["@markup.list.unchecked"]      = { fg = c.fg_dark, bold = true },
 		["@diff.plus"]                  = "DiffAdd",
 		["@diff.minus"]                 = "DiffDelete",
 		["@diff.delta"]                 = "DiffChange",
@@ -76,6 +76,7 @@ function M.get(c, opts)
 		["@tag.attribute"]              = "@property",
 		["@tag.delimiter"]              = "Delimiter",
 
+		["@comment.markdown"]           = { fg = c.comment },
 		["@string.special.url.comment"] = "Comment",
 	}
 

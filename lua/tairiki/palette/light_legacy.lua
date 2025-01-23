@@ -1,28 +1,28 @@
 local util  = require("tairiki.util")
 ---@class tairiki.Palette
 local M     = {
-	bg = "#ffffff",
-	fg = "#001070",
-	purple = "#7929c8",
-	green = "#008000",
-	orange = "#df5926",
-	blue = "#0070c1",
-	yellow = "#7c5c20",
+	bg = "#e8e8e8",
+	fg = "#4d4d4d",
+	purple = "#8959a8",
+	green = "#718c00",
+	orange = "#e56710",
+	blue = "#4271ae",
+	yellow = "#caa720",
 	cyan = "#1e797f",
-	red = "#a31515",
-	comment = "#cd0009",
+	red = "#c82829",
+	comment = "#4271ce",
 	none = "none",
 
-	light_orange = "#c72e0f",
+	light_orange = "#d05200",
 	light_purple = "#693988",
 }
 
-M.bg_light  = "#f0f0f8"
-M.bg_light2 = "#e8e8e0"
-M.bg_light3 = "#d8d8d0"
-M.fg_dark   = "#202020"
-M.fg_dark2  = "#151515"
-M.fg_dark3  = "#000000"
+M.bg_light  = "#dcdcd6"
+M.bg_light2 = "#ccccc6"
+M.bg_light3 = "#dcdcd6"
+M.fg_dark   = "#151515"
+M.fg_dark2  = "#505050"
+M.fg_dark3  = "#696969"
 
 function M.regen_sub_groups(self)
 	self.diag       = {

@@ -26,6 +26,4 @@ function M.load(opts)
 	require("tairiki.theme").load(opts)
 end
 
-vim.print(vim.split(",,asdf,2,3,4,", ","))
-
 return M

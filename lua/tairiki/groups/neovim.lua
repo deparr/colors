@@ -52,9 +52,9 @@ function M.get(c, opts)
 		PmenuMatchSel               = { bold = true },
 		PmenuSbar                   = { fg = c.none, bg = c.bg_light2 },
 		PmenuSel                    = { fg = c.blue, bg = c.bg_light2 },
-		PmenuThumb                  = { fg = c.fg_dark, bg = c.fg_dark },
+		PmenuThumb                  = { fg = c.fg_dark3, bg = c.fg_dark3 },
 		Question                    = { fg = c.yellow },
-		QuickFixLine                = { fg = c.blue, underline = true },
+		QuickFixLine                = { bg = c.bg_light2 },
 		Search                      = { fg = c.bg, bg = c.yellow },
 		SignColumn                  = { fg = c.fg, bg = opts.transparent and c.none or c.bg },
 		SnippetTabstop              = "Visual",
@@ -84,10 +84,10 @@ function M.get(c, opts)
 		WinSeparator                = { fg = c.fg_dark3 },
 		lCursor                     = { fg = c.bg, bg = c.fg },
 
-		Added                       = { fg = c.diff.add },
+		Added                       = { fg = c.green },
 		Bold                        = { bold = true },
 		Boolean                     = { fg = c.syn.literal },
-		Changed                     = { fg = c.diff.change },
+		Changed                     = { fg = c.blue },
 		Character                   = { fg = c.syn.string },
 		Comment                     = { fg = c.comment, style = opts.code_style.comments },
 		Conditional                 = { fg = c.syn.keyword, style = opts.code_style.conditionals },
@@ -110,7 +110,7 @@ function M.get(c, opts)
 		Operator                    = { fg = c.syn.operator },
 		PreCondit                   = { fg = c.syn.keyword_mod },
 		PreProc                     = { fg = c.syn.keyword },
-		Removed                     = { fg = c.diff.remove },
+		Removed                     = { fg = c.red },
 		Repeat                      = { fg = c.syn.keyword, style = opts.code_style.keywords },
 		Special                     = { fg = c.syn.special, bold = true },
 		SpecialChar                 = { fg = c.syn.special },
@@ -145,14 +145,36 @@ function M.get(c, opts)
 		DiagnosticUnderlineInfo     = { sp = c.diag.info, underline = not opts.diagnostics.undercurls, undercurls = opts.diagnostics.undercurls },
 		DiagnosticUnderlineWarn     = { sp = c.diag.warn, underline = not opts.diagnostics.ndercurls, undercurls = opts.diagnostics.undercurls },
 		DiagnosticUnderlineError    = { sp = c.diag.error, underline = not opts.diagnostics.undercurls, undercurls = opts.diagnostics.undercurls },
-		DiagnosticVirtualTextOk     = { fg = c.diag.ok, bg = opts.diagnostics.background and util.darken(c.diag.ok, 0.1, c.bg) or c.none },
-		DiagnosticVirtualTextHint   = { fg = c.diag.hint, bg = opts.diagnostics.background and util.darken(c.diag.hint, 0.1, c.bg) or c.none },
-		DiagnosticVirtualTextInfo   = { fg = c.diag.info, bg = opts.diagnostics.background and util.darken(c.diag.info, 0.1, c.bg) or c.none },
-		DiagnosticVirtualTextWarn   = { fg = c.diag.warn, bg = opts.diagnostics.background and util.darken(c.diag.warn, 0.1, c.bg) or c.none },
-		DiagnosticVirtualTextError  = { fg = c.diag.error, bg = opts.diagnostics.background and util.darken(c.diag.error, 0.1, c.bg) or c.none },
+
+		DiagnosticVirtualTextOk     = {
+			fg = opts.diagnostics.darker and util.darken(c.diag.ok, 0.85, c.bg) or c.diag.ok,
+			bg = opts.diagnostics.background and util.darken(c.diag.ok, 0.1, c.bg) or c.none
+		},
+		DiagnosticVirtualTextHint   = {
+			fg = opts.diagnostics.darker and util.darken(c.diag.hint, 0.85, c.bg) or c.diag.hint,
+			bg = opts.diagnostics.background and util.darken(c.diag.hint, 0.1, c.bg) or c.none
+		},
+		DiagnosticVirtualTextInfo   = {
+			fg = opts.diagnostics.darker and util.darken(c.diag.info, 0.85, c.bg) or c.diag.info,
+			bg = opts.diagnostics.background and util.darken(c.diag.info, 0.1, c.bg) or c.none
+		},
+		DiagnosticVirtualTextWarn   = {
+			fg = opts.diagnostics.darker and util.darken(c.diag.warn, 0.85, c.bg) or c.diag.warn,
+			bg = opts.diagnostics.background and util.darken(c.diag.warn, 0.1, c.bg) or c.none
+		},
+		DiagnosticVirtualTextError  = {
+			fg = opts.diagnostics.darker and util.darken(c.diag.error, 0.85, c.bg) or c.diag.error,
+			bg = opts.diagnostics.background and util.darken(c.diag.error, 0.1, c.bg) or c.none
+		},
+
+		diffAdded                   = "Added",
+		diffRemoved                 = "Removed",
+		diffChanged                 = "Changed",
+		diffFile                    = { fg = c.blue },
+		diffLine                    = { fg = c.blue },
 
 		-- double define @variable so the theme is always cohesive, even when
-		-- opts.plugins.none is given
+		-- opts.plugins.none is given.
 		-- avoids https://github.com/morhetz/gruvbox/issues/459
 		["@variable"]               = { fg = c.syn.ident },
 	}

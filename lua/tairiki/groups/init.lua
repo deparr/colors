@@ -1,11 +1,17 @@
+local util = require "tairiki.util"
 local M = {}
 
 -- realname > modname
 M.plugins = {
+	["diffview.nvim"]   = "diffview",
+	["gitsigns.nvim"]   = "gitsigns",
 	["neovim"]          = "neovim",
+	["nvim-cmp"]        = "cmp",
+	["oil.nvim"]        = "oil",
 	["semantic-tokens"] = "semantic_tokens",
 	["telescope.nvim"]  = "telescope",
 	["treesitter"]      = "treesitter",
+	["vim-fugitive"]    = "fugitive",
 }
 
 function M.flatten_styles(groups)
@@ -30,7 +36,16 @@ function M.load(opts, colors)
 				groups[module] = true
 			end
 		elseif opts.plugins.auto then
-			vim.notify("tairiki: todo plugin auto discovery")
+			if package.loaded.lazy then
+				local names = vim.tbl_keys(require("lazy.core.config").plugins)
+				for _, plugin in ipairs(names) do
+					if M.plugins[plugin] then
+						groups[M.plugins[plugin]] = true
+					end
+				end
+			else
+				vim.notify("tairiki.nvim: unable to load lazy.nvim for plugin autodetect", vim.log.levels.ERROR)
+			end
 		end
 
 		for plugin, module in pairs(M.plugins) do
@@ -48,17 +63,21 @@ function M.load(opts, colors)
 	local ret = {}
 	for group, enabled in pairs(groups) do
 		if enabled then
-			local ok, groupmod = pcall(require, "tairiki.groups." .. group)
-			if not ok then
-				vim.notify("tairiki: unable to load group` " .. group)
-			end
+			-- local ok, groupmod = pcall(require, "tairiki.groups." .. group)
+			local groupmod = util.load_mod("tairiki.groups." .. group)
 			for g, hl in pairs(groupmod.get(colors, opts)) do
 				ret[g] = hl
 			end
 		end
 	end
 
-	ret = vim.tbl_extend("force", ret, colors.group_x and colors:group_x(opts) or {})
+	if colors.highlights then
+		ret = vim.tbl_extend("force", ret, colors.highlights)
+	end
+
+	if opts.highlights then
+		opts.highlights(ret, colors, opts)
+	end
 
 	M.flatten_styles(ret)
 
